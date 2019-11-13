@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OCL-Editer": {
+      "commandName": "Project",
+      "commandLineArgs": "../../../e1.ocl"
+    }
+  }
+}

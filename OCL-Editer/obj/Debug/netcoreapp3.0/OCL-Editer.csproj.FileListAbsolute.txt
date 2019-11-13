@@ -1,0 +1,11 @@
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\obj\Debug\netcoreapp3.0\OCL-Editer.AssemblyInfoInputs.cache
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\obj\Debug\netcoreapp3.0\OCL-Editer.AssemblyInfo.cs
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.exe
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.deps.json
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.runtimeconfig.json
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.runtimeconfig.dev.json
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.dll
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\bin\Debug\netcoreapp3.0\OCL-Editer.pdb
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\obj\Debug\netcoreapp3.0\OCL-Editer.dll
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\obj\Debug\netcoreapp3.0\OCL-Editer.pdb
+C:\Users\tvanh\OneDrive\Documents\Studium\Forschung\projects\OCL-Editer\OCL-Editer\obj\Debug\netcoreapp3.0\OCL-Editer.csprojAssemblyReference.cache

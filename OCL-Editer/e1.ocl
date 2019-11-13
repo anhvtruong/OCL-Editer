@@ -1,0 +1,4 @@
+package Rules 
+	context Operation::SetTask() pre DurationNotNegativ: self.duration >= 0
+	context Operation::SetTask() pre OverlappingProdTime: startTime.sum() >= test.predecessor.EndTime
+endpackage
