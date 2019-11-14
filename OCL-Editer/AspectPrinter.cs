@@ -1703,6 +1703,7 @@ namespace OCL
         {
             switch (s.ToLower())
             {
+                case "forall": return "TrueForAll";
                 case "sum": return "Sum";
                 case "notempty": return "Count() > 0";
                 case "count": return "Count";
@@ -1736,7 +1737,7 @@ namespace OCL
             {
                 OCL.Absyn.PN _pn = (OCL.Absyn.PN)p;
                 if (Trace[Trace.Count - 4].Equals("PropertyCall"))
-                    Aspect.Code.Add(_pn.Ident_);
+                    Aspect.Code.Add(ConvertToCS(_pn.Ident_));
 
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
                 PrintInternal(_pn.Ident_, 0);

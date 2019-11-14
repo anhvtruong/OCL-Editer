@@ -6,13 +6,35 @@
 /****************************************************************************/
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using OCL.Absyn;
 
 namespace OCL
 {
     public class Test
     {
+        public static ArrayList ScanFile(string file)
+        {
+            Stream stream = File.OpenRead(file);
+            Scanner scanner = Scanner.CreateScanner(stream);
+            Parser parser = new Parser(scanner);
+            try
+            {
+                OCLfile parse_tree = parser.ParseOCLfile();
+                return AspectPrinter.Print(parse_tree);
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine("Parse NOT Successful:");
+                Console.Out.WriteLine(e.Message);
+                Console.Out.WriteLine("");
+                Console.Out.WriteLine("Stack Trace:");
+                Console.Out.WriteLine(e.StackTrace);
+                return null;
+            }
+        }
         public static void Main(string[] args)
         {
             if (args.Length > 0)
@@ -45,6 +67,8 @@ namespace OCL
                         ArrayList array = AspectPrinter.Print(parse_tree);
                         foreach (Aspect a in array)
                             a.Print();
+                        List<int> l = new List<int>() { 1, 2, 3, 4, 5, 6 };
+                        l.TrueForAll(x => x + 1 > 2);
                     }
                     else
                     {

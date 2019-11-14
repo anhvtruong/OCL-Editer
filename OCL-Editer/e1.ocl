@@ -1,4 +1,4 @@
 package Rules 
-	context Operation::SetTask() pre DurationNotNegativ: self.duration >= 0
-	context Operation::SetTask() pre OverlappingProdTime: startTime.sum() >= test.predecessor.EndTime
+	context Machine::SetEntry(op: Operation) pre StartTimeCollision:
+		self.Workload->forAll(v|v.StartTime < op.Starttime and v.EndTime > op.Starttime)
 endpackage
