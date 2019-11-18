@@ -675,10 +675,11 @@ namespace OCL
                 if (Aspect.Type == "pre")
                 {
                     Aspect.BeforeCode = Aspect.ArrayToString(Aspect.Code);
-                    Aspect.AfterCode = "True";
-                } else if (Aspect.Type == "post")
+                    Aspect.AfterCode = "true";
+                }
+                else if (Aspect.Type == "post")
                 {
-                    Aspect.BeforeCode = "True";
+                    Aspect.BeforeCode = "true";
                     Aspect.AfterCode = Aspect.ArrayToString(Aspect.Code);
                 }
                 else
@@ -1402,10 +1403,10 @@ namespace OCL
                 case "double": return "double";
                 case "abs": return "Abs";
                 case "div":
-                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1); 
+                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1);
                     return " / ";
                 case "mod":
-                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1); 
+                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1);
                     return " % ";
                 case "concat": return "Concat";
                 case "substring": return "Substring";
