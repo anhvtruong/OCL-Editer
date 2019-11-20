@@ -4,7 +4,7 @@ package Rules
 		pre StrartSmallerThanEnd: self.Workload->forAll(v1, v2|v1.StartTime < v2.EndTime)
 	context Meeting inv:
 	let noConflict : Boolean =
-		participants.meetings->forAll(m|m<>self and m.isConfirmed and self->forAll(m1, m2 |m1.a > m2.b))
+		participants.meetings->forAll(m|m<>self implies m.isConfirmed and self->forAll(m1, m2 |m1.a > m2.b))
 	in
 		isConfirmed implies noConflict
 endpackage

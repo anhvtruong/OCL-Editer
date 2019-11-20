@@ -67,9 +67,15 @@ namespace OCL
                         ArrayList array = AspectPrinter.Print(parse_tree);
                         foreach (Aspect a in array)
                             a.Print();
-                        /*List<int> l = new List<int>() { 1, 2, 3, 4, 5, 6 };
-                        var b = l.TrueForAll(x => l.TrueForAll(y => x != y ? x + y > 2 : true));
-                        Console.WriteLine(b);*/
+                        List<int> l = new List<int>() { 1, 2, 3, 4, 5, 6 };
+                        var b = l.TrueForAll(x => l.TrueForAll(y =>
+                        {
+                            if (x > y)
+                                return x + y >= 3;
+                            else
+                                return true;
+                        }));
+                        Console.WriteLine(b);
                     }
                     else
                     {

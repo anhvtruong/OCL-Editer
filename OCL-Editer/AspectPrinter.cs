@@ -1189,8 +1189,10 @@ namespace OCL
                 OCL.Absyn.EOpImpl _eopimpl = (OCL.Absyn.EOpImpl)p;
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
                 PrintInternal(_eopimpl.Expression_1, 0);
+                Aspect.Code.Add(" ? ");
                 Render("implies");
                 PrintInternal(_eopimpl.Expression_2, 1);
+                Aspect.Code.Add(" : true");
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
             }
             else if (p is OCL.Absyn.EOpLog)
