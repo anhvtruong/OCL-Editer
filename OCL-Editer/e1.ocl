@@ -1,10 +1,8 @@
 package Rules 
 	context Machine::SetEntry(op: Operation, op2: Operation)
-		pre StartTimeCollision: self.abc.Workload->forAll(v, op, op2|v.StartTime < op.Starttime and v.EndTime > op.Starttime)
-		pre StrartSmallerThanEnd: self.Workload->forAll(v1, v2|v1.StartTime < v2.EndTime)
-	context Meeting inv:
-	let noConflict : Boolean =
-		participants.meetings->forAll(m|m<>self implies m.isConfirmed and self->forAll(m1, m2 |m1.a > m2.b))
-	in
-		isConfirmed implies noConflict
+		pre StartTimeCollision: self.Workload->forAll(v, op, op2|v.StartTime < op.StartTime and v.EndTime > op.StartTime)
+		pre StrartSmallerThanEnd: self.Workload->forAll(
+			v1, v2| v1.StartTime < v2.StartTime implies
+				v1.EndTime <= v2.StartTime and 
+				self.Workload->forall(vv | vv.EndTime < op.StartTime))
 endpackage

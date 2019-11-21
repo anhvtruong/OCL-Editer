@@ -4,6 +4,7 @@ using System;
 using System.Text; // for StringBuilder
 using System.Collections;
 using OCL.Absyn;
+using System.Collections.Generic;
 
 namespace OCL
 {
@@ -22,9 +23,8 @@ namespace OCL
         private static StringBuilder buffer = new StringBuilder(BUFFER_INITIAL_CAPACITY);
 
         private static ArrayList Trace = new ArrayList();
-        private static int numberOfVar = 1;
+        private static Stack<int> numberOfVars = new Stack<int>();
         private static int rootIndex = -1;
-        private static int numberOfRight = 0;
         private static ArrayList rootCode = new ArrayList();
 
         private static bool isLambdaExp = false;
@@ -207,8 +207,6 @@ namespace OCL
         {
             Aspect.Code.Clear();
             rootCode.Clear();
-            numberOfVar = 0;
-            numberOfRight = 0;
             rootIndex = -1;
         }
         #endregion
@@ -1643,7 +1641,7 @@ namespace OCL
                 PrintInternal(_pcpconcrete.ListPCPHelper_, 0);
 
                 Render(")");
-                for (int i = 0; i <= numberOfRight; i++)
+                for (int i = numberOfVars.Pop(); i > 0; i--)
                     Aspect.Code.Add(")");
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
             }
@@ -1690,7 +1688,6 @@ namespace OCL
                     Aspect.Code.Add(" => ");
                     foreach (var r in rootCode)
                         Aspect.Code.Add(r);
-                    numberOfRight++;
                     PrintInternal(_pcpcomma.Expression_, 0);
                     if (_i_ > 0) Render(RIGHT_PARENTHESIS);
                 }
@@ -1736,7 +1733,7 @@ namespace OCL
         private static void PrintInternal(OCL.Absyn.ListPCPHelper p, int _i_)
         {
             Trace.Add("ListPCPHelper");
-            numberOfVar = p.Count;
+            numberOfVars.Push(p.Count);
             for (int i = 0; i < p.Count; i++)
             {
                 PrintInternal(p[i], 0);
@@ -1749,7 +1746,6 @@ namespace OCL
                     Render("");
                 }
             }
-
             rootIndex = -1;
             Trace.Remove("ListPCPHelper");
         }
