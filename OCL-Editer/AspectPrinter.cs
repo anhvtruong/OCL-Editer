@@ -27,7 +27,7 @@ namespace OCL
         private static int rootIndex = -1;
         private static ArrayList rootCode = new ArrayList();
 
-        private static bool isLambdaExp = false;
+        private static Stack<bool> isLambdaExps = new Stack<bool>();
         private static ArrayList Aspects = new ArrayList();
         private static Aspect Aspect = new Aspect();
 
@@ -1387,7 +1387,7 @@ namespace OCL
             switch (s.ToLower())
             {
                 case "forall":
-                    isLambdaExp = true;
+                    isLambdaExps.Push(true);
                     return "TrueForAll";
                 case "sum": return "Sum";
                 case "notempty": return "Count() > 0";
@@ -1641,7 +1641,10 @@ namespace OCL
                 PrintInternal(_pcpconcrete.ListPCPHelper_, 0);
 
                 Render(")");
-                for (int i = numberOfVars.Pop(); i > 0; i--)
+                if (isLambdaExps.Count > 0 && isLambdaExps.Pop())
+                    for (int i = numberOfVars.Pop(); i > 0; i--)
+                        Aspect.Code.Add(")");
+                else
                     Aspect.Code.Add(")");
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
             }
@@ -1679,7 +1682,6 @@ namespace OCL
                     ArrayList temp = new ArrayList();
                     for (int i = rootIndex; i < Aspect.Code.Count - 1; i++)
                         temp.Add(Aspect.Code[i]);
-                    isLambdaExp = false;
                     rootCode = temp;
                 }
                 //Aspect.ArrayPrint(rootCode);
