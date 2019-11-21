@@ -1641,9 +1641,12 @@ namespace OCL
                 PrintInternal(_pcpconcrete.ListPCPHelper_, 0);
 
                 Render(")");
-                if (isLambdaExps.Count > 0 && isLambdaExps.Pop())
-                    for (int i = numberOfVars.Pop(); i > 0; i--)
-                        Aspect.Code.Add(")");
+                if (isLambdaExps.Count > 0 && numberOfVars.Count > 0)
+                {
+                    if (isLambdaExps.Pop())
+                        for (int i = numberOfVars.Pop(); i > 0; i--)
+                            Aspect.Code.Add(")");
+                }
                 else
                     Aspect.Code.Add(")");
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
