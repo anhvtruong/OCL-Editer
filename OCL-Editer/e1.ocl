@@ -3,6 +3,8 @@ package Rules
 		pre StartTimeCollision: self.Workload->forAll(v, op, op2|v.StartTime < op.StartTime and v.EndTime > op.StartTime)
 		pre StrartSmallerThanEnd: self.Workload->forAll(
 			v1, v2| v1.StartTime < v2.StartTime implies
-				v1.EndTime <= v2.StartTime and 
+				v1.EndTime <= v2.StartTime and self.Workload->excludes(op) and
 				self.Workload->forall(vv | vv.EndTime < op.StartTime))
+		post test: self.Workload->exists(w1, w2 | w1.StartTime >= w2.StartTime)
+		pre test2: self.Workload->excludes(op)
 endpackage

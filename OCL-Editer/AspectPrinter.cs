@@ -30,6 +30,7 @@ namespace OCL
         private static Stack<bool> isLambdaExps = new Stack<bool>();
         private static ArrayList Aspects = new ArrayList();
         private static Aspect Aspect = new Aspect();
+        private static bool isNegativ;
 
         //You may wish to change render
         private static void Render(String s)
@@ -1393,8 +1394,13 @@ namespace OCL
                 case "notempty": return "Count() > 0";
                 case "count": return "Count";
                 case "size": return "Count";
-                case "exists": return "Exists";
-                case "includes": return "Exists";
+                case "exists":
+                    isLambdaExps.Push(true);
+                    return "Exists";
+                case "includes": return "Contains";
+                case "excludes":
+                    Aspect.Code.Insert(rootIndex, "!");
+                    return "Contains";
                 case "calender": return "DateTime.Today";
                 case "year": return "Year";
                 case "month": return "Month";
@@ -1634,6 +1640,12 @@ namespace OCL
             {
                 OCL.Absyn.PCPConcrete _pcpconcrete = (OCL.Absyn.PCPConcrete)p;
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
+
+                bool checkLambdaExpression = false;
+                if (Aspect.Code[Aspect.Code.Count - 1] == "TrueForAll" ||
+                    Aspect.Code[Aspect.Code.Count - 1] == "Exists")
+                    checkLambdaExpression = true;
+
                 Render("(");
                 Aspect.Code.Add("(");
 
@@ -1641,14 +1653,17 @@ namespace OCL
                 PrintInternal(_pcpconcrete.ListPCPHelper_, 0);
 
                 Render(")");
-                if (isLambdaExps.Count > 0 && numberOfVars.Count > 0)
+                if (checkLambdaExpression)
                 {
-                    if (isLambdaExps.Pop())
-                        for (int i = numberOfVars.Pop(); i > 0; i--)
-                            Aspect.Code.Add(")");
+                    isLambdaExps.Pop();
+                    for (int i = numberOfVars.Pop(); i > 0; i--)
+                        Aspect.Code.Add(")");
                 }
                 else
+                {
+                    numberOfVars.Pop();
                     Aspect.Code.Add(")");
+                }
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
             }
             Trace.Remove("PropertyCallParameters");
@@ -1729,6 +1744,7 @@ namespace OCL
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
                 Render("|");
                 Aspect.Code.Add(" => ");
+                rootCode.Clear();
                 PrintInternal(_pcpbar.Expression_, 0);
                 if (_i_ > 0) Render(RIGHT_PARENTHESIS);
             }
