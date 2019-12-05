@@ -6,5 +6,5 @@ package Rules
 				v1.EndTime <= v2.StartTime and self.Workload->excludes(op) and
 				self.Workload->forall(vv | vv.EndTime < op.StartTime))
 		post test: self.Workload->exists(w1, w2 | w1.StartTime >= w2.StartTime)
-		pre test2: self.Workload->excludes(op)
+		pre test2: self._Workload.sum(op | op.Duration) > 10
 endpackage
