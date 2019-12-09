@@ -7,4 +7,6 @@ package Rules
 				self.Workload->forall(vv | vv.EndTime < op.StartTime))
 		post test: self.Workload->exists(w1, w2 | w1.StartTime >= w2.StartTime)
 		pre test2: self._Workload.sum(op | op.Duration) > 10
+	context T_ProductionOrder::set_Quantity()
+		pre QuantityGreaterThanZero: value <> null
 endpackage

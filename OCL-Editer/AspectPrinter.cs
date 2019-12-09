@@ -1301,6 +1301,7 @@ namespace OCL
             {
                 OCL.Absyn.ENull _enull = (OCL.Absyn.ENull)p;
                 if (_i_ > 8) Render(LEFT_PARENTHESIS);
+                Aspect.Code.Add("null");
                 Render("null");
                 if (_i_ > 8) Render(RIGHT_PARENTHESIS);
             }
