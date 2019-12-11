@@ -1392,16 +1392,17 @@ namespace OCL
                     isLambdaExps.Push(true);
                     return "TrueForAll";
                 case "sum": return "Sum";
-                case "notempty": return "Count() > 0";
+                case "isempty": return "IsEmpty";
+                case "notempty": return "NotEmpty";
                 case "count": return "Count";
-                case "size": return "Count";
+                case "size": return "Size";
                 case "exists":
                     isLambdaExps.Push(true);
                     return "Exists";
                 case "includes": return "Contains";
-                case "excludes":
-                    Aspect.Code.Insert(rootIndex, "!");
-                    return "Contains";
+                case "excludes": return "Excludes";
+                case "includesAll": return "IncludesAll";
+                case "excludesAll": return "ExcludesAll";
                 case "calender": return "DateTime.Today";
                 case "year": return "Year";
                 case "month": return "Month";
@@ -1409,16 +1410,19 @@ namespace OCL
                 case "integer": return "int";
                 case "double": return "double";
                 case "abs": return "Abs";
-                case "div":
-                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1);
-                    return " / ";
-                case "mod":
-                    Aspect.Code.RemoveAt(Aspect.Code.Count - 1);
-                    return " % ";
+                case "div": return "Div";
+                case "mod": return "Mod";
+                case "max": return "Max";
+                case "min": return "Min";
+                case "floor": return "Floor";
+                case "round": return "Round";
+                case "ceiling": return "Ceiling";
                 case "concat": return "Concat";
                 case "substring": return "Substring";
                 case "toupper": return "toUpper";
                 case "tolower": return "toLower";
+                case "toInt": return "ToInt";
+                case "toReal": return "ToReal";
                 default: return s;
             }
         }
@@ -1920,7 +1924,7 @@ namespace OCL
             if (p is OCL.Absyn.LAnd)
             {
                 OCL.Absyn.LAnd _land = (OCL.Absyn.LAnd)p;
-                Aspect.Code.Add(" & ");
+                Aspect.Code.Add(" && ");
 
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
                 Render("and");
@@ -1929,7 +1933,7 @@ namespace OCL
             else if (p is OCL.Absyn.LOr)
             {
                 OCL.Absyn.LOr _lor = (OCL.Absyn.LOr)p;
-                Aspect.Code.Add(" | ");
+                Aspect.Code.Add(" || ");
 
                 if (_i_ > 0) Render(LEFT_PARENTHESIS);
                 Render("or");
