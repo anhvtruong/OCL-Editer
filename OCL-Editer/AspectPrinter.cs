@@ -1388,41 +1388,77 @@ namespace OCL
         {
             switch (s.ToLower())
             {
-                case "forall":
-                    isLambdaExps.Push(true);
-                    return "TrueForAll";
-                case "sum": return "Sum";
-                case "isempty": return "IsEmpty";
-                case "notempty": return "NotEmpty";
-                case "count": return "Count";
-                case "size": return "Size";
-                case "exists":
-                    isLambdaExps.Push(true);
-                    return "Exists";
-                case "includes": return "Contains";
-                case "excludes": return "Excludes";
-                case "includesAll": return "IncludesAll";
-                case "excludesAll": return "ExcludesAll";
+                // General
                 case "calender": return "DateTime.Today";
                 case "year": return "Year";
                 case "month": return "Month";
                 case "day": return "Day";
                 case "integer": return "int";
                 case "double": return "double";
+
+                // Int Methods
                 case "abs": return "Abs";
                 case "div": return "Div";
                 case "mod": return "Mod";
                 case "max": return "Max";
                 case "min": return "Min";
+
+                // Real Methods
                 case "floor": return "Floor";
                 case "round": return "Round";
                 case "ceiling": return "Ceiling";
+
+                // String Methods
                 case "concat": return "Concat";
                 case "substring": return "Substring";
                 case "toupper": return "toUpper";
                 case "tolower": return "toLower";
                 case "toInt": return "ToInt";
                 case "toReal": return "ToReal";
+
+                // Collection Methods
+                case "sum": return "Sum";
+                case "isempty": return "IsEmpty";
+                case "notempty": return "NotEmpty";
+                case "count": return "Count";
+                case "size": return "Size";
+
+                case "forall":
+                    isLambdaExps.Push(true);
+                    return "TrueForAll";
+                case "exists":
+                    isLambdaExps.Push(true);
+                    return "Exists";
+
+                case "includes": return "Contains";
+                case "excludes": return "Excludes";
+                case "includesAll": return "IncludesAll";
+                case "excludesAll": return "ExcludesAll";
+                case "including": return "Including";
+                case "excluding": return "Excluding";
+
+                case "union": return "UnionOcl";
+                case "intersection": return "Intersection";
+                case "select": return "Select";
+
+                // List Methods
+                case "append": return "Append";
+                case "prepend": return "Prepend";
+                case "insertAt": return "Insert";
+                case "subSequence": return "SubSequence";
+                case "at": return "At";
+                case "first": return "First";
+                case "last": return "Last";
+                case "indexOf": return "IndexOf";
+                case "reject": return "Reject";
+                case "asBag": return "AsBag";
+                case "asSet": return "ToHashSet";
+
+                // Set Methods
+                case "symmetricdifference": return "SymmetricExceptWith";
+                case "asSequence": return "ToList";
+
+                // Else
                 default: return s;
             }
         }
