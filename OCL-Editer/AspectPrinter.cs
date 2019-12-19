@@ -1439,7 +1439,7 @@ namespace OCL
 
                 case "union": return "UnionOcl";
                 case "intersection": return "Intersection";
-                case "select": return "Select";
+                case "select": return "SelectOcl";
 
                 // List Methods
                 case "append": return "Append";
